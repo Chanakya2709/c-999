@@ -1,0 +1,39 @@
+var SpeechRecognition = window.webKitSpeechRecognition;
+ 
+var recognition= new SpeechRecognition();
+
+function start()
+{
+    document.getElementById("textbook").innerHTML="";
+    recognition.start();
+}
+
+recognition.onresult= function (event){
+
+    console.log(event);
+
+    var Content = event.results[0][0].transcript;
+    
+    document.getElementById("textbook").innerHTML=Content;
+    console.log(Content);
+
+    speak();
+}
+function speak(){
+    var synth=window.SpeechSynthesis;
+
+    speak_data = document.getElementById("textbox"). value ;
+
+    var utterThis=new SpeechSynthesisUtterance(speak_data);
+
+    synth.speak(utterThis);
+    Webcam.attach(camera);
+}
+Webcam .set({
+    width:360,
+    height:250,
+    image_format : 'png',
+    png_quality:90
+
+});
+camera = document.getElementById("camera");
